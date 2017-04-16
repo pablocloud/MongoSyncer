@@ -17,6 +17,7 @@ class MongoServer {
 
     static mapping = {
         mongoDatabases lazy: false
+        mongoDatabases sort: 'name', order: 'asc'
     }
 
 }

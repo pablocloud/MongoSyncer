@@ -14,6 +14,7 @@ class MongoDatabase {
 
     static mapping = {
         collections lazy: false
+        collections sort: 'name', order: 'asc'
     }
 
 }
