@@ -16,10 +16,12 @@ import org.bson.types.ObjectId
 class MongoModels {
 
     MongoConnection mongoConnection = new MongoConnection()
+    MongoClient mongo
     Querys querys = new Querys()
 
     def populateMongoServer(MongoServer mongoServer) {
-        def databaseNames = querys.getAllDatabasesNames(mongoServer)
+        mongo = mongoConnection.getConnection(mongoServer)
+        def databaseNames = querys.getAllDatabasesNames(mongo, mongoServer)
         databaseNames.each { database ->
             MongoDatabase currentDatabase
             if (mongoServer.mongoDatabases == null) {
@@ -35,7 +37,7 @@ class MongoModels {
             if (currentDatabase.collections == null) {
                 currentDatabase.collections = []
             }
-            querys.getAllCollectionsNamesFromDatabase(mongoServer, database).each { collection ->
+            querys.getAllCollectionsNamesFromDatabase(mongo, mongoServer, database).each { collection ->
                 currentDatabase.each {
                     if (!it.collections.name.contains(collection)) {
                         currentDatabase.collections.add(new MongoCollection(name: collection))
@@ -44,6 +46,7 @@ class MongoModels {
 
             }
         }
+        mongo.close()
         return mongoServer
     }
 
