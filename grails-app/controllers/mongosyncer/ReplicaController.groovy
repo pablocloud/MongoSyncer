@@ -12,6 +12,13 @@ class ReplicaController {
     }
 
     @Transactional
+    changeAutoSync(MongoReplication replica){
+        replica.autoSync = !replica.autoSync
+        replica.save()
+        redirect controller: 'replica', action: 'show', id: replica.id
+    }
+
+    @Transactional
     syncIteration(MongoReplication replica) {
         models.simpleSync(replica)
         redirect controller: 'replica', action: 'show', id: replica.id
