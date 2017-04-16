@@ -59,9 +59,6 @@ class MongoModels {
                 database.collections.each { collection ->
                     MongoCollectionNative<Document> collectionFrom = databaseFrom.getCollection(collection.name)
                     MongoCollectionNative<Document> collectionTo = databaseTo.getCollection(collection.name)
-                    collectionFrom.findAll().each {
-                        println it
-                    }
                     long countTo = collectionTo.count()
                     if (countTo != 0) {
                         Document lastDocumentTo = collectionTo.find().sort(new BasicDBObject('_id', -1)).limit(1).first()
@@ -80,6 +77,8 @@ class MongoModels {
                 populateMongoServer(mongoTo)
             }
         }
+        clientTo.close()
+        clientFrom.close()
     }
 
 }
