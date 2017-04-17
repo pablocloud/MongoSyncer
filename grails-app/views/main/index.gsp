@@ -72,7 +72,7 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="replica-add-label"><g:message code="replica.add"/></h4>
             </div>
-            <g:form controller="replica" action="save">
+            <g:form controller="replica" action="update">
                 <div class="modal-body">
                     <div class="input-group">
                         <label for="from"><g:message code="replica.from"/></label>

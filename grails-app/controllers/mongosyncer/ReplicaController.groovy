@@ -8,11 +8,11 @@ class ReplicaController {
     MongoModels models = new MongoModels()
 
     def show(MongoReplication replica) {
-        [replica: replica]
+        [replica: replica, mongoServers: MongoServer.listOrderById(params)]
     }
 
     @Transactional
-    changeAutoSync(MongoReplication replica){
+    changeAutoSync(MongoReplication replica) {
         replica.autoSync = !replica.autoSync
         replica.save()
         redirect controller: 'replica', action: 'show', id: replica.id
@@ -33,7 +33,7 @@ class ReplicaController {
     @Transactional
     update(MongoReplication replica) {
         replica.save()
-        redirect controller: 'main', action: 'index'
+        redirect controller: 'replica', action: 'show', id: replica.id
     }
 
     @Transactional
