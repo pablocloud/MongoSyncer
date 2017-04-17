@@ -4,15 +4,19 @@ import grails.transaction.Transactional
 
 class MongoServerController {
 
+    def show(MongoServer mongoServer) {
+        [mongoServer: mongoServer]
+    }
+
     @Transactional
     save(MongoServer mongoServer) {
-        if(mongoServer.username == null){
+        if (mongoServer.username == null) {
             mongoServer.username = ''
         }
-        if(mongoServer.password == null){
+        if (mongoServer.password == null) {
             mongoServer.password = ''
         }
-        if(mongoServer.authDatabase == null){
+        if (mongoServer.authDatabase == null) {
             mongoServer.authDatabase = ''
         }
         mongoServer.save()
