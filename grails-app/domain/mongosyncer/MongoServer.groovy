@@ -13,6 +13,7 @@ class MongoServer {
     ]
 
     static constraints = {
+        mongoDatabases nullable: true
     }
 
     static mapping = {
