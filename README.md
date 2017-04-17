@@ -2,6 +2,8 @@
 
 The goal of this project is to replicate the 'replica' (duh!) system of MongoDB in Grails/Groovy.
 
+[![Build Status](https://travis-ci.org/pablocloud/MongoSyncer.svg?branch=master)](https://travis-ci.org/pablocloud/MongoSyncer)
+
 [![Quality Gate](https://sonarqube.com/api/badges/measure?key=mongosyncer:MongoSyncer&metric=lines)](Lines)
 [![Quality Gate](https://sonarqube.com/api/badges/measure?key=mongosyncer:MongoSyncer&metric=ncloc)](CodeLines)
 [![Quality Gate](https://sonarqube.com/api/badges/measure?key=mongosyncer:MongoSyncer&metric=comment_lines_density)](Commentslinedensity)
