@@ -2,6 +2,7 @@ package mongosyncer
 
 class MongoDatabase {
 
+    MongoServer owner
     String name
 
     static hasMany = [
