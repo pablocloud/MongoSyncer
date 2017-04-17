@@ -1,6 +1,7 @@
 package mongodb.utils
 
 import com.mongodb.MongoClient
+import com.mongodb.MongoClientException
 import com.mongodb.MongoClientURI
 import mongosyncer.MongoServer
 
@@ -30,7 +31,7 @@ class MongoConnection {
                 connection = "mongodb://" + mongoServer.username + ":" + mongoServer.password + "@" + mongoServer.host + ":" + mongoServer.port
             }
 
-        } catch (Exception e) {
+        } catch (MongoClientException e) {
             e.printStackTrace()
         }
         return new MongoClient(new MongoClientURI(connection))
