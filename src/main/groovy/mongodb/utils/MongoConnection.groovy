@@ -9,8 +9,6 @@ class MongoConnection {
 
     private static MongoConnection instance
 
-    private Connection() {}
-
     static MongoConnection getInstance() { return (instance == null) ? new MongoConnection() : instance }
 
     /**
@@ -34,7 +32,6 @@ class MongoConnection {
 
         } catch (Exception e) {
             e.printStackTrace()
-            System.exit(3)
         }
         return new MongoClient(new MongoClientURI(connection))
     }
