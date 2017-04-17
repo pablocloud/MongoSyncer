@@ -29,6 +29,7 @@ class MongoModels {
             }
             if (!mongoServer.mongoDatabases.name.contains(database)) {
                 currentDatabase = new MongoDatabase(name: database)
+                currentDatabase.owner = mongoServer
                 mongoServer.mongoDatabases.add(currentDatabase)
                 currentDatabase.save()
             } else {
@@ -40,7 +41,9 @@ class MongoModels {
             querys.getAllCollectionsNamesFromDatabase(mongo, database).each { collection ->
                 currentDatabase.each {
                     if (!it.collections.name.contains(collection)) {
-                        currentDatabase.collections.add(new MongoCollection(name: collection))
+                        def collectionMongo = new MongoCollection(name: collection)
+                        collectionMongo.owner = currentDatabase
+                        currentDatabase.collections.add(collectionMongo)
                     }
                 }
 

@@ -10,7 +10,7 @@
         <div class="panel panel-primary">
             <div class="panel-body">
                 <h3><g:message code="replica"/></h3>
-                <button type="button" style="margin-bottom: 1%" class="btn btn-primary btn-lg" data-toggle="modal"
+                <button type="button" style="margin-bottom: 1%" class="btn btn-primary" data-toggle="modal"
                         data-target="#replica-add"><g:message
                         code="replica.add"/></button>
                 <table class="table table-bordered table-striped table-hover">
@@ -36,7 +36,7 @@
                     </g:each>
                     </tbody>
                 </table>
-                <button type="button" style="margin-bottom: 1%" class="btn btn-primary btn-lg" data-toggle="modal"
+                <button type="button" style="margin-bottom: 1%" class="btn btn-primary" data-toggle="modal"
                         data-target="#server-add"><g:message
                         code="mongoserver.add"/></button>
                 <h3><g:message code="mongoServer"/></h3>
@@ -50,12 +50,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <g:each in="${mongoServers}">
+                    <g:each in="${mongoServers}" var="server">
                         <tr>
-                            <td>${it.host}</td>
-                            <td>${it.port}</td>
-                            <td><g:each in="${it.mongoDatabases}">${it.name}<br></g:each></td>
-                            <td></td>
+                            <td>${server.host}</td>
+                            <td>${server.port}</td>
+                            <td><g:each in="${server.mongoDatabases}">${it.name}<br></g:each></td>
+                            <td><g:link controller="mongoServer" action="show" id="${server.id}"
+                                        class="btn btn-info"><g:message code="mongoServer.update"/></g:link></td>
                         </tr>
                     </g:each>
                     </tbody>
@@ -72,7 +73,7 @@
                         aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="replica-add-label"><g:message code="replica.add"/></h4>
             </div>
-            <g:form controller="replica" action="save">
+            <g:form controller="replica" action="update">
                 <div class="modal-body">
                     <div class="input-group">
                         <label for="from"><g:message code="replica.from"/></label>
