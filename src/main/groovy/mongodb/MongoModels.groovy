@@ -27,13 +27,13 @@ class MongoModels {
             if (mongoServer.mongoDatabases == null) {
                 mongoServer.mongoDatabases = []
             }
-            if (!mongoServer.mongoDatabases.name.contains(database)) {
+            if (mongoServer.mongoDatabases.name.contains(database)) {
+                currentDatabase = MongoDatabase.findByName(database)
+            } else {
                 currentDatabase = new MongoDatabase(name: database)
                 currentDatabase.owner = mongoServer
                 mongoServer.mongoDatabases.add(currentDatabase)
                 currentDatabase.save()
-            } else {
-                currentDatabase = MongoDatabase.findByName(database)
             }
             if (currentDatabase.collections == null) {
                 currentDatabase.collections = []
