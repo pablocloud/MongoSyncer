@@ -1,3 +1,4 @@
+<%@ page import="org.bson.Document" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,24 @@
                 ${mongoCollection.name}
             </div>
             <div class="panel-body">
-                ${collection.toString()}
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <g:each in="${((Document) collection.first()).keySet()}">
+                            <th>${it}</th>
+                        </g:each>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <g:each in="${collection}">
+                            <tr>
+                                <g:each in="${((Document) it).values()}">
+                                    <td>${it}</td>
+                                </g:each>
+                            </tr>
+                        </g:each>
+                    </tbody>
+                </table>
             </div>
             <div class="panel-footer">
 
