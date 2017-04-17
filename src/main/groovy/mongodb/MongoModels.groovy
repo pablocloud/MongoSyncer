@@ -50,6 +50,7 @@ class MongoModels {
             }
         }
         mongo.close()
+        mongoServer.save(flush: true)
         return mongoServer
     }
 
