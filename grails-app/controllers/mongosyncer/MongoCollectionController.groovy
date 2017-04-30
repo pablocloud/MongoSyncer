@@ -12,8 +12,14 @@ class MongoCollectionController {
 
     def show(MongoCollection mongoCollection) {
         mongo = mongoConnection.getConnection(mongoCollection.owner.owner)
-        Collection collection = querys.getFullCollection(mongo, mongoCollection.owner.name, mongoCollection.name)
-        [mongoCollection: mongoCollection, collection: collection]
+        Collection collection
+        if (params.query) {
+            collection = querys.getCollectionByQuery(mongo, mongoCollection.owner.name, mongoCollection.name, params.query as String)
+            [mongoCollection: mongoCollection, collection: collection, query: params.query as String]
+        } else {
+            collection = querys.getFullCollection(mongo, mongoCollection.owner.name, mongoCollection.name)
+            [mongoCollection: mongoCollection, collection: collection]
+        }
     }
 
 }
