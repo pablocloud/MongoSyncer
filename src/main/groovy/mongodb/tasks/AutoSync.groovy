@@ -10,17 +10,21 @@ class AutoSync extends Thread {
     @Override
     void run() {
         while (true) {
-            List<MongoReplication> replicas
-            MongoReplication.withTransaction {
-                replicas = MongoReplication.listOrderById()
-                replicas.each {
-                    if (it.autoSync) {
-                        println 'Autosyncing replica : ' + it.from.host + ':' + it.from.port + ' -> ' + it.to.host + ':' + it.to.port
-                        models.simpleSync(it)
+            try {
+                List<MongoReplication> replicas
+                MongoReplication.withTransaction {
+                    replicas = MongoReplication.listOrderById()
+                    replicas.each {
+                        if (it.autoSync) {
+                            println 'Autosyncing replica : ' + it.from.host + ':' + it.from.port + ' -> ' + it.to.host + ':' + it.to.port
+                            models.simpleSync(it)
+                        }
                     }
                 }
+                sleep(5000)
+            } catch (Exception ex) {
+                ex.printStackTrace()
             }
-            sleep(5000)
         }
     }
 

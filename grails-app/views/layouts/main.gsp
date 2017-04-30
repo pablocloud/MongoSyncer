@@ -35,7 +35,7 @@
         </div>
     </nav>
 </header>
-<main class="container">
+<main class="container-fluid">
     <g:layoutBody/>
 </main>
 <footer>

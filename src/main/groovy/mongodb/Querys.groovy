@@ -1,5 +1,6 @@
 package mongodb
 
+import com.mongodb.BasicDBObject
 import com.mongodb.MongoClient
 import com.mongodb.MongoCredential
 import com.mongodb.client.FindIterable
@@ -18,10 +19,18 @@ class Querys {
         mongo.getDatabase(database).listCollectionNames()
     }
 
-    def getFullCollection(MongoClient mongo, String database, String collection){
+    def getFullCollection(MongoClient mongo, String database, String collection) {
         MongoCollection<Document> mongoCollection = mongo.getDatabase(database).getCollection(collection)
         FindIterable<Document> find = mongoCollection.find()
         find.collect()
+    }
+
+    def getCollectionByQuery(MongoClient mongo, String database, String collection, String query) {
+        MongoCollection<Document> mongoCollection = mongo.getDatabase(database).getCollection(collection)
+        FindIterable<Document> find = mongoCollection.find(BasicDBObject.parse(query))
+        if(find.size() != 0){
+            find.collect()
+        }
     }
 
 }

@@ -12,24 +12,45 @@
                 ${mongoCollection.name}
             </div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <g:each in="${((Document) collection.first()).keySet()}">
-                            <th>${it}</th>
-                        </g:each>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <g:each in="${collection}">
-                            <tr>
-                                <g:each in="${((Document) it).values()}">
-                                    <td>${it}</td>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <g:form controller="mongoCollection" action="show" id="${mongoCollection.id}">
+                            <div class="form-group">
+                                <label for="query"><g:message code="mongoCollection.query"/></label>
+                                <g:if test="${params.query}">
+                                    <input type="text" name="query" id="query" class="form-control" value="${params.query}"/>
+                                </g:if>
+                                <g:else>
+                                    <input type="text" name="query" id="query" class="form-control"/>
+                                </g:else>
+                            </div>
+                            <input type="submit" class="btn btn-info"/>
+                        </g:form>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <g:if test="${collection != null && collection.size() != 0}">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <g:each in="${((Document) collection.first()).keySet()}">
+                                        <th>${it}</th>
+                                    </g:each>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <g:each in="${collection}">
+                                    <tr>
+                                        <g:each in="${((Document) it).values()}">
+                                            <td>${it}</td>
+                                        </g:each>
+                                    </tr>
                                 </g:each>
-                            </tr>
-                        </g:each>
-                    </tbody>
-                </table>
+                                </tbody>
+                            </table>
+                        </g:if>
+                    </div>
+                </div>
+                <hr>
             </div>
             <div class="panel-footer">
 
