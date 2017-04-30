@@ -5,6 +5,13 @@
     <meta name="layout" content="main"/>
 </head>
 <body>
+<ol class="breadcrumb">
+    <li><g:link controller="mongoServer" action="show"
+                id="${mongoCollection.owner.owner.id}">${mongoCollection.owner.owner.host}:${mongoCollection.owner.owner.port}</g:link></li>
+    <li><g:link controller="mongoDatabase" action="show"
+                id="${mongoCollection.owner.id}">${mongoCollection.owner.name}</g:link></li>
+    <li class="active">${mongoCollection.name}</li>
+</ol>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-primary">
@@ -15,47 +22,56 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <g:form controller="mongoCollection" action="show" id="${mongoCollection.id}">
-                            <div class="form-group">
-                                <label for="query"><g:message code="mongoCollection.query"/></label>
-                                <g:if test="${params.query}">
-                                    <input type="text" name="query" id="query" class="form-control"
-                                           value="${params.query}"/>
-                                </g:if>
-                                <g:else>
-                                    <input type="text" name="query" id="query" class="form-control" value="{}"/>
-                                </g:else>
-                            </div>
-                            <div class="form-group">
-                                <label for="orderBy"><g:message code="mongoCollection.orderBy"/></label>
-                                <select name="orderBy" id="orderBy" class="form-control">
-                                    <g:each in="${((Document) collection.first()).keySet()}">
-                                        <g:if test="${params.orderBy == it}">
-                                            <option selected value="${it}">${it}</option>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label for="query"><g:message code="mongoCollection.query"/></label>
+                                        <g:if test="${params.query}">
+                                            <input type="text" name="query" id="query" class="form-control"
+                                                   value="${params.query}"/>
                                         </g:if>
                                         <g:else>
-                                            <option value="${it}">${it}</option>
+                                            <input type="text" name="query" id="query" class="form-control" value="{}"/>
                                         </g:else>
-                                    </g:each>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="order"><g:message code="mongoCollection.order"/></label>
-                                <select name="order" id="order" class="form-control">
-                                    <g:if test="${params.order == '-1'}">
-                                        <option selected value="-1">asc</option>
-                                    </g:if>
-                                    <g:else>
-                                        <option value="-1">asc</option>
-                                    </g:else>
-                                    <g:if test="${params.order == '1'}">
-                                        <option selected value="1">desc</option>
-                                    </g:if>
-                                    <g:else>
-                                        <option value="1">desc</option>
-                                    </g:else>
-                                </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="orderBy"><g:message code="mongoCollection.orderBy"/></label>
+                                        <select name="orderBy" id="orderBy" class="form-control">
+                                            <g:each in="${((Document) collection.first()).keySet()}">
+                                                <g:if test="${params.orderBy == it}">
+                                                    <option selected value="${it}">${it}</option>
+                                                </g:if>
+                                                <g:else>
+                                                    <option value="${it}">${it}</option>
+                                                </g:else>
+                                            </g:each>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="order"><g:message code="mongoCollection.order"/></label>
+                                        <select name="order" id="order" class="form-control">
+                                            <g:if test="${params.order == '-1'}">
+                                                <option selected value="-1">asc</option>
+                                            </g:if>
+                                            <g:else>
+                                                <option value="-1">asc</option>
+                                            </g:else>
+                                            <g:if test="${params.order == '1'}">
+                                                <option selected value="1">desc</option>
+                                            </g:if>
+                                            <g:else>
+                                                <option value="1">desc</option>
+                                            </g:else>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                             <input type="submit" class="btn btn-info"/>
+                            <hr>
                         </g:form>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

@@ -4,6 +4,11 @@
     <meta name="layout" content="main"/>
 </head>
 <body>
+<ol class="breadcrumb">
+    <li><g:link controller="mongoServer" action="show"
+                id="${mongoDatabase.owner.id}">${mongoDatabase.owner.host}:${mongoDatabase.owner.port}</g:link></li>
+    <li class="active">${mongoDatabase.name}</li>
+</ol>
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-primary">
