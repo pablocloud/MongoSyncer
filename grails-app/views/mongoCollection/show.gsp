@@ -18,11 +18,42 @@
                             <div class="form-group">
                                 <label for="query"><g:message code="mongoCollection.query"/></label>
                                 <g:if test="${params.query}">
-                                    <input type="text" name="query" id="query" class="form-control" value="${params.query}"/>
+                                    <input type="text" name="query" id="query" class="form-control"
+                                           value="${params.query}"/>
                                 </g:if>
                                 <g:else>
-                                    <input type="text" name="query" id="query" class="form-control"/>
+                                    <input type="text" name="query" id="query" class="form-control" value="{}"/>
                                 </g:else>
+                            </div>
+                            <div class="form-group">
+                                <label for="orderBy"><g:message code="mongoCollection.orderBy"/></label>
+                                <select name="orderBy" id="orderBy" class="form-control">
+                                    <g:each in="${((Document) collection.first()).keySet()}">
+                                        <g:if test="${params.orderBy == it}">
+                                            <option selected value="${it}">${it}</option>
+                                        </g:if>
+                                        <g:else>
+                                            <option value="${it}">${it}</option>
+                                        </g:else>
+                                    </g:each>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="order"><g:message code="mongoCollection.order"/></label>
+                                <select name="order" id="order" class="form-control">
+                                    <g:if test="${params.order == '-1'}">
+                                        <option selected value="-1">asc</option>
+                                    </g:if>
+                                    <g:else>
+                                        <option value="-1">asc</option>
+                                    </g:else>
+                                    <g:if test="${params.order == '1'}">
+                                        <option selected value="1">desc</option>
+                                    </g:if>
+                                    <g:else>
+                                        <option value="1">desc</option>
+                                    </g:else>
+                                </select>
                             </div>
                             <input type="submit" class="btn btn-info"/>
                         </g:form>
