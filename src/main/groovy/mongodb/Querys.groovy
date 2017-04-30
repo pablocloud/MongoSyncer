@@ -25,10 +25,10 @@ class Querys {
         find.collect()
     }
 
-    def getCollectionByQuery(MongoClient mongo, String database, String collection, String query) {
+    def getCollectionByQuery(MongoClient mongo, String database, String collection, String query, String orderBy, String order) {
         MongoCollection<Document> mongoCollection = mongo.getDatabase(database).getCollection(collection)
-        FindIterable<Document> find = mongoCollection.find(BasicDBObject.parse(query))
-        if(find.size() != 0){
+        FindIterable<Document> find = mongoCollection.find(BasicDBObject.parse(query)).sort(BasicDBObject.parse('{' + orderBy + ' : ' + order + '}'))
+        if (find.size() != 0) {
             find.collect()
         }
     }
