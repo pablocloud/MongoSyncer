@@ -13,6 +13,11 @@ The goal of this project is to replicate the 'replica' (duh!) system of MongoDB 
 [![Quality Gate](https://sonarqube.com/api/badges/measure?key=mongosyncer:MongoSyncer&metric=code_smells)](CodeSmells)
 
 
+![screenshot home](screenshots/screenshot1.png "Home")
+
+![Collection view](screenshots/screenshot2.png "Collection view")
+
+
 ## Actual features
 
 - Can add MongoDB servers
