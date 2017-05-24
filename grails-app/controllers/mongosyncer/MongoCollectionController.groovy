@@ -20,9 +20,11 @@ class MongoCollectionController {
             }
             collection = querys.getCollectionByQuery(mongo, mongoCollection.owner.name, mongoCollection.name,
                     params.query as String, params.orderBy as String, params.order as String)
+            mongo.close()
             [mongoCollection: mongoCollection, collection: collection, query: params.query as String]
         } else {
             collection = querys.getFullCollection(mongo, mongoCollection.owner.name, mongoCollection.name)
+            mongo.close()
             [mongoCollection: mongoCollection, collection: collection]
         }
     }
@@ -38,6 +40,7 @@ class MongoCollectionController {
             }
         }
         mongo.getDatabase(mongoCollection.owner.name).getCollection(mongoCollection.name).insertOne(document)
+        mongo.close()
         redirect controller: 'mongoCollection', action: 'show', id: mongoCollection.id
     }
 
