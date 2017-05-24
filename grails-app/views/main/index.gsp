@@ -18,7 +18,7 @@
                     <tr>
                         <th><g:message code="replica.from"/></th>
                         <th><g:message code="replica.to"/></th>
-                        <th><g:message code="replica.maxDiff"/></th>
+                        <th><g:message code="replica.iterationSize"/></th>
                         <th><g:message code="replica.autoSync"/></th>
                         <th><g:message code="replica.actions"/></th>
                     </tr>
@@ -39,7 +39,7 @@
                 <button type="button" style="margin-bottom: 1%" class="btn btn-primary" data-toggle="modal"
                         data-target="#server-add"><g:message
                         code="mongoserver.add"/></button>
-                <h3><g:message code="mongoServer"/></h3>
+                <h3><g:message code="mongoserver"/></h3>
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
@@ -56,7 +56,7 @@
                             <td>${server.port}</td>
                             <td><g:each in="${server.mongoDatabases}">${it.name}<br></g:each></td>
                             <td><g:link controller="mongoServer" action="show" id="${server.id}"
-                                        class="btn btn-info"><g:message code="mongoServer.update"/></g:link></td>
+                                        class="btn btn-info"><g:message code="mongoserver.update"/></g:link></td>
                         </tr>
                     </g:each>
                     </tbody>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="input-group">
                         <label for="autoSync"><g:message code="replica.autoSync"/></label>
-                        <f:input bean="${new MongoReplication()}" property="autoSync"/>
+                        <f:input id="autoSync" bean="${new MongoReplication()}" property="autoSync"/>
                     </div>
                 </div>
                 <div class="modal-footer">

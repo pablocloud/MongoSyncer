@@ -100,8 +100,34 @@
                 <hr>
             </div>
             <div class="panel-footer">
-
+                <button type="button" style="margin-bottom: 1%" class="btn btn-primary" data-toggle="modal"
+                        data-target="#document-add"><g:message
+                        code="document.add"/></button>
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="document-add" tabindex="-1" role="dialog" aria-labelledby="document-add-label">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <g:form controller="mongoCollection" action="save" id="${mongoCollection.id}">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="document-add-label"><g:message code="document.add"/></h4>
+                </div>
+                <div class="modal-body">
+                    <g:each in="${((Document) collection.first()).keySet()}">
+                        <g:if test="${it != '_id'}">
+                            <label for="json.${it}">${it}</label>
+                            <input class="form-control" type="text" id="json.${it}" name="json.${it}"/>
+                        </g:if>
+                    </g:each>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary">
+                </div>
+            </g:form>
         </div>
     </div>
 </div>
